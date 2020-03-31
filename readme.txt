@@ -3,7 +3,7 @@ Contributors: rkjellberg
 Tags: speedmaster, redis cache, stateless cache
 Requires at least: 4.0
 Tested up to: 5.3.2
-Stable tag: 1.0
+Stable tag: 1.0.0
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -31,7 +31,7 @@ You'll find a configuration guide in your WordPress Dashboard under "Settings > 
 No, you don't need write access for this plugin to work. However, if WordPress can't write to wp-content/ - you'll have to create the advanced-cache.php file manually.
 
 = What content gets cached? =
-All HTML-content that is generated from a GET-request will get cached. It's not possible to use dynamic content as visitor counters, user comments or dynamic widgets when this plugin is activated, unless you call the 'speedmaster_purge_cache'-hook from your plugin/theme to clear cache when data is updated. 
+All HTML-content that is generated from a GET-request will get cached. It's not possible to use dynamic content such as visitor counters, user comments or dynamic widgets when this plugin is activated, unless you call the 'speedmaster_purge_cache'-hook from your plugin/theme to clear cache when data is updated. 
 
 = Will this plugin cache POST-requests? =
 Only GET-requests will get cached. POST-requests are ignored and will load the live version of your website.
