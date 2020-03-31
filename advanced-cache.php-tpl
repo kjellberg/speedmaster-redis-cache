@@ -1,0 +1,34 @@
+<?php
+/**
+ * Speedmaster Redis Cache
+ *
+ * This file loads before WordPress and other resource demanding
+ * applications like mySQL - if WP_CACHE is set to true in wp-config.php
+ *
+ * @version 1
+ */
+
+defined( 'ABSPATH' ) or die( 'Cheatin\' uh?' );
+define('SPEEDMASTER_ADVANCED_CACHE', true);
+
+// Path to boot file.
+define('SPEEDMASTER_BOOT_PATH', ABSPATH . '/wp-content/plugins/speedmaster-redis-cache/boot.php');
+
+// Load Speedmaster Redis Cache boot file.
+if ( file_exists( SPEEDMASTER_BOOT_PATH ) ) {
+	require_once( SPEEDMASTER_BOOT_PATH );
+} else {
+
+	// Speedmaster plugin was not found. Try to automatically delete this file or
+	// display an admin notice with instructions.
+	@unlink(__FILE__);
+
+	if (file_exists(__FILE__)) {
+		add_action('admin_notices', function() {
+			$class = 'notice notice-error';
+			$file_path = __FILE__;
+			$message = "Please delete file <code>$file_path</code> to completely uninstall Speedmaster Redis Cache.";
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), "<strong>Speedmaster:</strong> " . $message ); 
+		});
+	}
+}
