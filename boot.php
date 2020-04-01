@@ -1,16 +1,17 @@
 <?php
+// Prepend a base path if Predis is not available in your "include_path".
+require_once 'predis/autoload.php';
+Predis\Autoloader::register();
 
 require 'functions.php';
-require 'credis/Client.php';
-	
+
 // Check if requeste is cachable and has cache.
 if ( true == speedmaster_is_cachable() ) {
 
-	$redis = speedmaster_redis_object();
-	$key = speedmaster_page_redis_key();
-
 	try {
-		@$response = $redis->get($key);
+		$redis = speedmaster_redis_object();
+		$key = speedmaster_page_redis_key();
+		$response = $redis->get($key);
 
 		if ( !empty( $response ) ) {
 			echo $response;

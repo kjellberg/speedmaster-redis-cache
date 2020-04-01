@@ -5,4 +5,6 @@
  *
  * Plugin URL: https://wordpress.org/plugins/autoptimize/
  */
-add_action( 'autoptimize_action_cachepurged', 'speedmaster_purge_all_cache' );
+add_action( 'autoptimize_action_cachepurged', function() {
+	do_action( 'speedmaster_purge_cache' );
+} );

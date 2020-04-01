@@ -19,7 +19,10 @@
 
 defined( 'ABSPATH' ) or die( 'Cheatin\' uh?' );
 
-require_once( 'credis/Client.php' );
+// Prepend a base path if Predis is not available in your "include_path".
+require_once 'predis/autoload.php';
+Predis\Autoloader::register();
+
 require_once( 'functions.php' );
 require_once( '3dparty-integrations.php' );
 require_once( 'admin-page.php' );

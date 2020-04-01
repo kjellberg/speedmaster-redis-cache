@@ -27,7 +27,7 @@ function speedmaster_is_cachable() {
  */
 function speedmaster_redis_object() {
 	$redis_url = speedmaster_redis_url();
-	return new Credis_Client($redis_url);
+	return new Predis\Client($redis_url);
 }
 
 /**
@@ -37,8 +37,8 @@ function speedmaster_redis_object() {
 function speedmaster_redis_connected()
 { 
 	try {
-		@$redis = speedmaster_redis_object();
-		@$redis->ping();
+		$redis = speedmaster_redis_object();
+		$redis->ping();
 		return true;
 	} catch (Exception $e) {
 		return false;
@@ -139,7 +139,7 @@ function speedmaster_uninstall() {
  */
 function speedmaster_admin_notice_not_configured() {
     $class = 'notice notice-error';
-    $message = __( 'Not configured correctly. Please check the <a href="options-general.php?page=speedmaster-redis-cache#configuration">configration guide</a>', 'speedmaster' );
+    $message = __( 'Not configured correctly. Please check the <a href="options-general.php?page=speedmaster-redis-cache#configuration">configuration guide</a>', 'speedmaster' );
 
     printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), "<strong>Speedmaster:</strong> " . $message ); 
 }
@@ -151,7 +151,7 @@ function speedmaster_admin_notice_not_configured() {
  */
 function speedmaster_admin_notice_no_redis_connection() {
     $class = 'notice notice-error';
-    $message = __( 'Could not connect to Redis server. Please check your configuration.', 'speedmaster' );
+    $message = __( 'Could not connect to Redis server. Please check your <a href="options-general.php?page=speedmaster-redis-cache#configuration">configuration</a>.', 'speedmaster' );
 
     printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), "<strong>Speedmaster:</strong> " . $message ); 
 }
